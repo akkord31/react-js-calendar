@@ -6,7 +6,7 @@ import './Footer.css'
 export default function Footer(){
   return(
     <div className="footer">
-      <p>Архипов Евгений</p>
+      <p>You cannot view events because you are not logged into your account!</p>
     </div>
   );
 }

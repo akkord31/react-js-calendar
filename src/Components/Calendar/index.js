@@ -1,99 +1,137 @@
 import React from 'react';
+import classnames from 'classnames';
+import Events from './Events';
+import * as CalendarComponents from './CalendarComponents';
 
 import './index.css';
+
 export default class Calendar extends React.Component {
-  static defaultProps ={
-    weekDayNames: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
-    monthNames: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"],
-    years: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
-    onChange: Function.prototype,   //пуская функция
-  }
+    static defaultProps = {
+        date: new Date(),
+        years: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
+        monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+        weekDayNames: ['Пн', 'Вт', 'Ср', 'Чт' , 'Пт', 'Сб', 'Вс'],
+        onChange: Function.prototype
+    };
 
-  state = {
-    date: new Date(),
-    currentDate: new Date(),
-    selectedDate: null,
-  };
+    state = {
+        date: this.props.date,
+        currentDate: new Date(),
+        selectedDate: null
+    };
 
-  handlePrevMonthButtonClick = () => {
-    const date = new Date(this.state.date.getFullYear(), this.state.date.getMonth() - 1);
-    console.log({date});
-    this.setState({date});
-  };
-  handleNextMonthButtonClick = () => {
-    const date = new Date(this.state.date.getFullYear(), this.state.date.getMonth() + 1);
-    this.setState({date});
-  };
+    get year() {
+        return this.state.date.getFullYear();
+    }
 
-  handleSelectChange = () => {
-    const year = this.yearSelect.value;
-    const month = this.monthSelect.value
-    const date = new Date(year, month);
-    console.log(date);
-    this.setState({date});
-  };
+    get month() {
+        return this.state.date.getMonth();
+    }
 
-  handleDayClick = date => {
-    console.log(date);
-    this.setState({selectedDate: date});
+    get day() {
+        return this.state.date.getDate();
+    }
 
-    this.props.onChange(date);  //сообщение родительскому компоненту, что выбрана новая дата
-  };
+    handlePrevMonthButtonClick = () => {
+        const date = new Date(this.year, this.month - 1);
+        
+        this.setState({ date });
+    };
 
+  
 
-  render(){
+    handleNextMonthButtonClick = () => {
+        const date = new Date(this.year, this.month + 1);
+        
+        this.setState({ date });
+    };
 
-    const monthData = [
-      [undefined, undefined, undefined, new Date(), new Date(), new Date(), new Date()],
-      [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()],
-      [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()],
-      [new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date()],
-      [new Date(), new Date(), new Date(), new Date(), new Date(), undefined, undefined],
-    ]; 
-    return(
-      <div className='calendar'>
-        <header>
-          <button onClick={this.handlePrevMonthButtonClick}>{'<'}</button>
-          <select 
-            ref={element => this.monthSelect = element} 
-            defaultValue={this.month}
-            onChange={this.handleSelectChange}>
-              {this.props.monthNames.map((value, index) => 
-                <option key={value} value={index}>{value}</option>
-              )}
-          </select>
-          <select 
-            ref={element => this.yearSelect = element} 
-            defaultValue={this.year}
-            onChange={this.handleSelectChange}>
-              {this.props.years.map(year =>
-                <option key={year} value={year}>{year}</option>
-              )}
-          </select>
-          <button onClick={this.handleNextMonthButtonClick}>{'>'}</button>
-        </header>
+    handleSelectChange = () => {
+        const year = this.yearSelect.value;
+        const month = this.monthSelect.value;
 
-        <table className='calendar__table'>
-          <thead className="table__head">
-            <tr className="table__cols">
-              {this.props.weekDayNames.map(weekDay =>
-                <th key={weekDay} value={weekDay}>{weekDay}</th>)}
-            </tr>
-          </thead>
+        const date = new Date(year, month);
 
-          <tbody className='table__content'>
-            {monthData.map((week, index) => 
-              <tr key={index} className='week'>
-                {week.map((date, index) => 
-                  date ? 
-                  <td key={index} class="day" onClick={() => this.handleDayClick(date)}>{date.getDate()}</td> : 
-                  <td key={index}></td>
-                )}
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
-    );
-  }
+        this.setState({ date });
+    };
+
+    handleDayClick = date => {
+        this.setState({ selectedDate: date });
+        
+        this.props.onChange(date);
+    };
+
+   
+    render() {
+        const { years, monthNames, weekDayNames } = this.props;
+        const { currentDate, selectedDate } = this.state;
+
+        const monthData = CalendarComponents.getMonthData(this.year, this.month);
+
+        return (
+            <div className="calendar"> 
+                <header>
+                    <button onClick={this.handlePrevMonthButtonClick}>{'<'}</button>
+
+                    <select
+                        ref={element => this.monthSelect = element}
+                        value={this.month}
+                        onChange={this.handleSelectChange}
+                    >
+                        {monthNames.map((name, index) =>
+                            <option key={name} value={index}>{name}</option>
+                        )}
+                    </select>
+
+                    <select
+                        ref={element => this.yearSelect = element}
+                        value={this.year}
+                        onChange={this.handleSelectChange}
+                    >
+                        {years.map(year =>
+                            <option key={year} value={year}>{year}</option> 
+                        )}
+                    </select>
+
+                    <button onClick={this.handleNextMonthButtonClick}>{'>'}</button>
+                </header>
+
+                <table>
+                    <thead>
+                        <tr>
+                            {weekDayNames.map(name =>
+                                <th key={name}>{name}</th>    
+                            )}
+                        </tr>
+                    </thead>
+                                
+                    <tbody>
+                        {monthData.map((week, index) =>
+                            <tr key={index} className="week">
+                                {week.map((date, index) => date ?
+                                    <td
+                                        key={index}
+                                        className={classnames('day', {
+                                            'today': CalendarComponents.areEqual(date, currentDate),
+                                            'selected': CalendarComponents.areEqual(date, selectedDate)
+                                        })}
+                                        onClick={() => this.handleDayClick(date)}
+                                    >{date.getDate()}</td>
+                                    :
+                                    <td key={index} />
+                                )}
+                            </tr> 
+                        )}
+                    </tbody>
+                    
+                </table>
+                <br/>
+                <br/>
+                <hr align="left" width="1000px"/>
+
+                <Events date={this.props.date} />  
+                                     
+            </div>
+        );
+    }
 }

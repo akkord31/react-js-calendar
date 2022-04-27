@@ -11,8 +11,8 @@ export default function Header(){
         <nav className="nav__content">
           <ul>
             <li className="nav__content__item"><Link to="/">Main</Link></li>
-            <li className="nav__content__item"><Link to="../../Accounts/RegisterForm">Sign up</Link></li>
-            <li className="nav__content__item"><Link to="../../Accounts/LoginForm">Sign in</Link></li>
+            <li className="nav__content__item"><Link to="/register">Sign up</Link></li>
+            <li className="nav__content__item"><Link to="/login">Sign in</Link></li>
           </ul>
         </nav>
       </div>
