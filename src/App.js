@@ -4,7 +4,6 @@ import Footer from './Components/Shared/Footer/Footer';
 import Calendar from './Components/Calendar';
 import RegisterForm from './Components/Accounts/RegisterForm/RegisterForm';
 import LoginForm from "./Components/Accounts/LoginForm/LoginForm";
-import Popup from "./Components/Calendar/Popup/Popup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import './App.css';

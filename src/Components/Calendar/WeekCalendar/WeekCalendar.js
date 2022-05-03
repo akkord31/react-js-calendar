@@ -2,10 +2,10 @@ import React from 'react';
 import classnames from 'classnames';
 import Events from './Events/Events';
 import * as CalendarComponents from './CalendarComponents';
-
+import { events as eventList } from '../Events/Events';
 import './index.css';
 
-export default class Calendar extends React.Component {
+export default class WeekCalendar extends React.Component {
     static defaultProps = {
         date: new Date(),
         years: [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023],
@@ -14,12 +14,13 @@ export default class Calendar extends React.Component {
         onChange: Function.prototype
     };
 
+
     state = {
         date: this.props.date,
         currentDate: new Date(),
         selectedDate: null
     };
-
+    
     get year() {
         return this.state.date.getFullYear();
     }
@@ -69,7 +70,7 @@ export default class Calendar extends React.Component {
         const monthData = CalendarComponents.getMonthData(this.year, this.month);
 
         return (
-            <div className="calendar"> 
+            <div className="week__calendar"> 
                 <header>
                     <button onClick={this.handlePrevMonthButtonClick}>{'<'}</button>
 
@@ -102,7 +103,7 @@ export default class Calendar extends React.Component {
                             {weekDayNames.map(name =>
                                 <th key={name}>{name}</th>    
                             )}
-                            <th>Дела</th>
+                            
                         </tr>
                     </thead>
                                 
@@ -123,13 +124,11 @@ export default class Calendar extends React.Component {
                                 )}
                             </tr> 
                         )}
-                     
+                       
                     </tbody>
-                    
                 </table>
                 <br/>
                 <br/>
-                <hr align="left" width="1000px"/>
 
                 <Events date={this.props.date} />  
                                      
