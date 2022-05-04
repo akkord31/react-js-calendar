@@ -1,17 +1,21 @@
 import React from "react";
 
+import "./Popup.css";
+
 const Popup = (props) => {
+  if(!props.isActive){
+    return null;
+  }
   return (
-    <div className="popup"> 
-      <div className="modal__content">
-        <div className="modal__header">
-          <h4 className="modal__title">Modal_header</h4>
+    <div className={props.isActive ? "popup Active" : "popup"}  onClick={() => props.handlePopupClick(false)}> 
+      <div className="popup__content">
+        <div className="popup__header">
+          <h4 className="popup__title">{props.title}</h4>
         </div>
-        <div className="modal__body">
-          <p>content</p>  
+        <div className="popup__body">
+          <p>asddsa</p>  
         </div>
-        <div className="modal__footer">
-          <button className="button" onClick={props.closeMe} >Close</button>
+        <div className="popup__footer">
         </div>
       </div>
     </div>

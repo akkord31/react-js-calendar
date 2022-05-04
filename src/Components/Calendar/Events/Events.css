@@ -1,5 +1,16 @@
 .event__item{
   padding: 10px;
   margin-left: 20px;
-  
+  margin: 5px;
+  background-color: blue;
+  width: 300px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.events__container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

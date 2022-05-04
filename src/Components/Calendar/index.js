@@ -129,7 +129,7 @@ export default class Calendar extends React.Component {
                 </table>
                 <br/>
                 <br/>
-                <hr align="left" width="1000px"/>
+                <hr align="left" width="100%"/>
 
                 <Events date={this.props.date} />  
                                      
