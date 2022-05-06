@@ -67,7 +67,8 @@ export const events = [
             <div className="time">
                 {this.props.date && <p>Выбранная дата: {this.props.date.toLocaleDateString()}</p>}
             </div>
-            {<div className="event__list">
+            {this.props.isLoged ? 
+            <div className="event__list">
                 {this.state.currentEvents.map((event) => (
                     <div key={event.id} className="event__item" onClick={this.handlePopupClick}>
                         {/* <input type="checkbox" checked={event.isDone} onChange={event.handleChange} /> */}
@@ -78,11 +79,12 @@ export const events = [
                 <Popup
                 isActive = {this.state.isActive}
                 handlePopupClick = {this.handlePopupClick}
+                events = {this.state.events}
                 >
                 </Popup>
             </div>
-        }
-            
+         : <p>Пошёл нахуй</p>
+        } 
         </div>
          )}
 }

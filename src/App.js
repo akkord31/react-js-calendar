@@ -12,33 +12,38 @@ import './App.css';
 export default class App extends React.Component {
   
   state = {
-    date: new Date()
+    date: new Date(),
+    isLoged: false,
+    username: ""
   }
   updateDate = (sentdate) => {
-    this.setState({date:sentdate});
+    this.setState({date: sentdate});
   }
   handleDateChange = date => {
     this.setState({date});
-
   };
-
-
+  handleLoginClick = (param) => {
+    this.setState({isLoged: param})
+  }
+  setUsername = (inputUsername) => {
+    this.setState({username: inputUsername})
+  }
   render() {
     return(
     <div className="App">
       
       <Router>
-        
-        <Header />
+
+        <Header isLoged = {this.state.isLoged}/>
           <Routes>
-            <Route exact path="/" element={<Calendar date={this.state.date} onChange={this.handleDateChange}/>} />
+            <Route exact path="/" element={<Calendar isLoged={this.state.isLoged} date={this.state.date} onChange={this.handleDateChange}/>} />
          
             <Route path="/register" element={<RegisterForm />} />
-            <Route path="/login" element={<LoginForm />} />
+            <Route path="/login" element={<LoginForm setUsername={this.setUsername} handleLoginClick={this.handleLoginClick}/>} />
           </Routes>
           
       
-        <Footer />
+        <Footer isLoged={this.state.isLoged} username={this.state.username} />
       </Router> 
     
     </div>

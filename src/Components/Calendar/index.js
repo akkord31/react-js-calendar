@@ -34,7 +34,6 @@ export default class Calendar extends React.Component {
 
     handlePrevMonthButtonClick = () => {
         const date = new Date(this.year, this.month - 1);
-        
         this.setState({ date });
     };
 
@@ -42,7 +41,6 @@ export default class Calendar extends React.Component {
 
     handleNextMonthButtonClick = () => {
         const date = new Date(this.year, this.month + 1);
-        
         this.setState({ date });
     };
 
@@ -104,6 +102,7 @@ export default class Calendar extends React.Component {
                             )}
                             <th>Дела</th>
                         </tr>
+                        
                     </thead>
                                 
                     <tbody>
@@ -120,7 +119,11 @@ export default class Calendar extends React.Component {
                                     >{date.getDate()}</td>
                                     :
                                     <td key={index} />
+                                    
                                 )}
+
+                                {/* дела */}
+                                
                             </tr> 
                         )}
                      
@@ -131,7 +134,7 @@ export default class Calendar extends React.Component {
                 <br/>
                 <hr align="left" width="100%"/>
 
-                <Events date={this.props.date} />  
+                <Events isLoged={this.props.isLoged} date={this.props.date} />  
                                      
             </div>
         );

@@ -10,7 +10,7 @@ const Popup = (props) => {
     <div className={props.isActive ? "popup Active" : "popup"}  onClick={() => props.handlePopupClick(false)}> 
       <div className="popup__content">
         <div className="popup__header">
-          <h4 className="popup__title">{props.title}</h4>
+          <h4 className="popup__title">сюда назнавние тайтл</h4>
         </div>
         <div className="popup__body">
           <p>asddsa</p>  
