@@ -5,6 +5,36 @@ import * as CalendarComponents from './CalendarComponents';
 
 import './index.css';
 
+
+export const events = [
+    {
+        id: 1,
+        time: '10:30',    
+        date: '5/4/2022',
+        title: "event example",
+        content: "texttexttexttext",
+        isDone: false,
+    },
+    {
+      id: 2,
+      time: '11:30',    
+      date: '5/4/2022',
+      title: "event example2",
+      content: "texttexttexttext",
+      isDone: false,
+    },
+    {
+      id: 3,
+      time: '10:30',    
+      date: '5/4/2022',
+      title: "event example33",
+      content: "texttexttexttext",
+      isDone: false,
+    },
+  ]; 
+  
+
+
 export default class Calendar extends React.Component {
     static defaultProps = {
         date: new Date(),
@@ -17,7 +47,9 @@ export default class Calendar extends React.Component {
     state = {
         date: this.props.date,
         currentDate: new Date(),
-        selectedDate: null
+        selectedDate: null,
+        toDoList: [],
+        currentEvents: []
     };
 
     get year() {
@@ -37,11 +69,43 @@ export default class Calendar extends React.Component {
         this.setState({ date });
     };
 
-  
+    newCurrentEvents = () => {
+        this.state.currentEvents = [];
+        for (let i = 0; i < events.length; i++){
+            if(this.props.date.toLocaleDateString() === events[i].date){
+                this.state.currentEvents.push(events[i])
+            }
+        }
+    }
+
+    
+    
+
+    // countEventsOnThisMonth = () => {
+    //     let count = 0;
+    //     for (let i = 0; i < events.length; i++){
+    //         if(this.yearSelect.value == events[i].date.getFullYear() && Number(this.monthSelect.value) + 2 == events[i].date.getMonth()) {
+    //             count++;
+    //         }
+    //     }
+    //     let eventInWeeks = [];
+
+    //     const getWeekNumOfMonth = (d) => {
+    //         const firstDay = new Date(d.getFullYear(), d.getMonth(), 1).getDay();
+    //         return Math.ceil((d.getDate() + (firstDay - 1)) / 7);
+    //       }
+          
+    //     for(let i = 0; i < events.length; i++){
+    //         console.log(getWeekNumOfMonth(events[i].date))
+    //     }
+          
+    //     // console.log(count);
+    // }
 
     handleNextMonthButtonClick = () => {
         const date = new Date(this.year, this.month + 1);
         this.setState({ date });
+        this.countEventsOnThisMonth();
     };
 
     handleSelectChange = () => {
@@ -55,7 +119,7 @@ export default class Calendar extends React.Component {
 
     handleDayClick = date => {
         this.setState({ selectedDate: date });
-        
+        this.newCurrentEvents();
         this.props.onChange(date);
     };
 
@@ -123,7 +187,7 @@ export default class Calendar extends React.Component {
                                 )}
 
                                 {/* дела */}
-                                
+                             
                             </tr> 
                         )}
                      
@@ -133,8 +197,8 @@ export default class Calendar extends React.Component {
                 <br/>
                 <br/>
                 <hr align="left" width="100%"/>
-
-                <Events isLoged={this.props.isLoged} date={this.props.date} />  
+                            
+                <Events currentEvents = {this.state.currentEvents} toDoList={this.state.toDoList} isLoged={this.props.isLoged} date={this.props.date} />  
                                      
             </div>
         );

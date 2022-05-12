@@ -1,17 +1,28 @@
 .event__item{
-  padding: 10px;
-  margin-left: 20px;
+  padding: 3px;
   margin: 5px;
-  background-color: blue;
+  background-color: #696969;
   width: 300px;
-  text-align: center;
+  text-align: left;
   border-radius: 8px;
-  cursor: pointer;
+  display: flex;
 }
 
 .events__container{
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
+}
+
+.event__item__button{
+  margin-left: auto;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.event__item__checkbox{
+  display: flex;
+  margin: 3px;
+  padding: 3px;
 }

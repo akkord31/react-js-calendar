@@ -6,7 +6,7 @@ export default function LoginForm (props) {
 
   let navigate = useNavigate();
   const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
+  // const [password, setPassword] = useState('');
   const onLoginClick = (event) => {
     event.preventDefault();
     props.handleLoginClick(true);
