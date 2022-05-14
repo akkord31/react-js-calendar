@@ -3,7 +3,7 @@ import MonthCalendar from "./MonthCalendar"
 import Events from "./Events/Events"
 
 
-export const events = [
+const events = [
   {
       id: 1,
       time: '10:30',    
@@ -56,7 +56,7 @@ export default function MainWindow(props){
 
   return(
     <div>
-      <MonthCalendar onChange={data => handleDateChange(data)}/>
+      <MonthCalendar events={events} onChange={data => handleDateChange(data)}/>
       <Events currentEvents = {currentEvents} isLoged={props.isLoged} date={date} />
     </div>
   );

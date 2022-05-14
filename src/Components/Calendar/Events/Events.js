@@ -4,8 +4,6 @@ import Popup from ".//Popup/Popup";
 
 import "./Events.css";
 
-// https://stackoverflow.com/questions/55519168/open-a-popup-in-react
-
  const Events = (props) =>{
     // constructor(props) {
     //     super(props);

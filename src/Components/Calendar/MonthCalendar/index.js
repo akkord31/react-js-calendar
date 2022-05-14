@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
 import classnames from 'classnames';
-//import Events from '../Events/Events';
+// import Events from '../Events/Events';
 import * as CalendarComponents from './CalendarComponents';
-
+import {Link} from "react-router-dom";
 import './index.css';
 
 
@@ -103,7 +103,7 @@ export default class Calendar extends React.Component {
                             {weekDayNames.map(name =>
                                 <th key={name}>{name}</th>    
                             )}
-                            <th>Дела</th>
+                            <td>Дела</td>
                         </tr>
                         
                     </thead>
@@ -124,10 +124,20 @@ export default class Calendar extends React.Component {
                                     <td key={index} />
                                     
                                 )}
-                             
+                            {/* {week.map((week, index)  => {
+                                this.props.events.map((event) =>   {
+                                    console.log(week);
+                                if(CalendarComponents.getISOWeekInMonth(week).week == CalendarComponents.getISOWeekInMonth(event).week){
+                                    <td onClick={<WeekCalendar/>}>asd</td>
+                                }else{
+                                    <td></td>
+                                }
+                                })})} */}
+                                <td><Link to="/week">asd</Link></td>
                             </tr> 
+                            
                         )}
-                     
+                      
                     </tbody>
                     
                 </table>

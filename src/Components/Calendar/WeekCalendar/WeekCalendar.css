@@ -1,3 +1,63 @@
-.week__calendar{
+.calendar header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+  padding-top: 20px;
   
+}
+
+.calendar header button,
+.calendar header select {
+  margin: 0 4px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  
+}
+
+
+.calendar table {
+  table-layout: fixed;
+  background-color: #F8F8FF;
+  margin: auto;
+  border-radius: 10px;
+  border: 1px solid #000;
+  justify-content: center;
+  text-align: center;
+  
+}
+
+.calendar th {
+  vertical-align: middle;
+  text-align: center;
+  height: 36px;
+}
+
+.calendar .day {
+  padding: 4px 8px;
+  vertical-align: middle;
+  text-align: center;
+  border: 2px solid transparent;
+}
+
+.calendar .day:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+  
+}
+
+.calendar .day.selected {
+  border: 2px solid dodgerblue;
+}
+
+.calendar .day.today {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.calendar .day.today:hover {
+  background-color: #0081ff;
+}
+
+.calendar .day.today.selected {
+  border: 2px solid lightgray;
 }
