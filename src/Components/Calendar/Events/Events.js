@@ -37,10 +37,10 @@ import "./Events.css";
             {props.isLoged ? 
             <div className="event__list">
                 {props.currentEvents.map((event) => (
-                    <div key={event.id} className="event__item" onClick={() => handlePopupClick()}>
+                    <div key={event.id} className="event__item">
                         {/* <input type="checkbox" checked={event.isDone} onChange={event.handleChange} /> */}
                         <b>{event.time}</b> {event.title}
-
+                        <button className="event__item__button" onClick={() => handlePopupClick(true)}>Подробнее</button>
                     </div>
                 ))}  
                 <Popup

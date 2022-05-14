@@ -14,13 +14,16 @@ export default class WeekCalendar extends React.Component {
         onChange: Function.prototype
     };
 
-
     state = {
         date: this.props.date,
         currentDate: new Date(),
         selectedDate: null
     };
     
+    calculateEventsCountInWeek = (events) => {
+        
+    }
+
     get year() {
         return this.state.date.getFullYear();
     }
@@ -39,7 +42,7 @@ export default class WeekCalendar extends React.Component {
         this.setState({ date });
     };
 
-  
+    
 
     handleNextMonthButtonClick = () => {
         const date = new Date(this.year, this.month + 1);

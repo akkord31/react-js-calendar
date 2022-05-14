@@ -45,6 +45,27 @@ export function getDaysInMonth(date) {
     }
 }
 
+export function getISOWeekInMonth(date) {
+    // Copy date so don't affect original
+    var d = new Date(+date);
+    if (isNaN(d)) return;
+    // Move to previous Monday
+    d.setDate(d.getDate() - d.getDay() + 1);
+    // Week number is ceil date/7
+    return {month: +d.getMonth()+1,
+            week: Math.ceil(d.getDate()/7)};
+}
+
+export function weekCount(date) {
+    const month_number = date.getMonth();
+    const year = date.getFullYear();
+
+    var firstOfMonth = new Date(year, month_number-1, 1);
+    var lastOfMonth = new Date(year, month_number, 0);
+    var used = firstOfMonth.getDay() + 6 + lastOfMonth.getDate();
+    return Math.ceil( used / 7);
+}
+
 export function getDayOfWeek(date) {
     const dayOfWeek = date.getDay();
 
