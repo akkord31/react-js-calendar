@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from 'react';
 import Popup from ".//Popup/Popup";
+import { Link } from "react-router-dom";
 
 import "./Events.css";
 
@@ -13,20 +14,26 @@ import "./Events.css";
     //     };
     //   }
 
-    const [isActive, setIsActive] = useState(false);
+    const [isActive, setIsActive] = useState(false);  //popup
+    const [checked, setChecked] = useState([]);  //checkbox
 
     const handlePopupClick = (param) =>{
         setIsActive(param);      
     }
-    //   isDoneHandle = () => {
-    //     const [isDone, setChecked] = useState(true);
-    //     handleChange = () => {
-    //         setChecked(!isDone); // инвертируем стейт
-    //     }     
-    // }
+    const handleCheck = (event) => {
+        var updatedList = [...checked];
+        if (event.target.checked) {
+          updatedList = [...checked, event.target.value];
+        } else {
+          updatedList.splice(checked.indexOf(event.target.value), 1);
+        }
+        setChecked(updatedList);
+    };
     
-    
+    let isChecked = (item) =>
+        checked.includes(item) ? "checked-item" : "not-checked-item";
   
+
         return(
          <div className="events__container">
             <div className="time">
@@ -36,8 +43,9 @@ import "./Events.css";
             <div className="event__list">
                 {props.currentEvents.map((event) => (
                     <div key={event.id} className="event__item">
-                        {/* <input type="checkbox" checked={event.isDone} onChange={event.handleChange} /> */}
-                        <b>{event.time}</b> {event.title}
+                        <input className="event__item__checkbox" type="checkbox" onChange={handleCheck} />
+                        <div className="event__item__time">{event.time}</div>
+                        <div className={isChecked}>{event.title}</div> 
                         <button className="event__item__button" onClick={() => handlePopupClick(true)}>Подробнее</button>
                     </div>
                 ))}  
@@ -46,10 +54,14 @@ import "./Events.css";
                     handlePopupClick = {() => handlePopupClick()}
                 >
                 </Popup>
+                <div><Link to="/addevent">Добавить событие на этот день</Link></div>
             </div>
+            
+            
          : <p>Просмотр запрещён</p>
         } 
         </div>
-         )}
+        )
+    }
 
 export default Events;

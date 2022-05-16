@@ -1,0 +1,13 @@
+.add__form{
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  
+}
+.add__button{
+  margin: 10px;
+  width: 150px;
+  align-self: center;
+}

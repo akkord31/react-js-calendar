@@ -6,3 +6,10 @@
   padding: 20px;
   display: inline-block;
 }
+.btn__class{
+
+}
+.btn__class__disbled{
+  cursor: not-allowed;
+  pointer-events: none;
+}

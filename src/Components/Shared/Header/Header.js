@@ -14,7 +14,7 @@ export default function Header(props){
             <li className="nav__content__item"><Link to="/">Main</Link></li> 
           :  <><li className="nav__content__item"><Link to="/register">Sign up</Link></li>
               <li className="nav__content__item"><Link to="/login">Sign in</Link></li></>}
-           
+              
            
           </ul>
         </nav>

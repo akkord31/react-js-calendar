@@ -6,6 +6,7 @@ import LoginForm from "./Components/Accounts/LoginForm/LoginForm";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainWindow from "./Components/Calendar/MainWindow";
 import WeekCalendar from './Components/Calendar/WeekCalendar/WeekCalendar';
+import AddEventForm from './Components/Calendar/Events/AddEventForm';
 import './App.css';
 
 
@@ -38,8 +39,9 @@ export default class App extends React.Component {
           <Routes>
             <Route path="/" element={<MainWindow isLoged={this.state.isLoged}/>}></Route>
             <Route path="/week" element={<WeekCalendar isLoged={this.state.isLoged}/>}></Route>
-            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/register" element={<RegisterForm handleLoginClick={this.handleLoginClick}/>} />
             <Route path="/login" element={<LoginForm setUsername={this.setUsername} handleLoginClick={this.handleLoginClick}/>} />
+            <Route path="/addevent" element={<AddEventForm /> } />
           </Routes>
           
       

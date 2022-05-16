@@ -3,6 +3,7 @@ import classnames from 'classnames';
 // import Events from '../Events/Events';
 import * as CalendarComponents from './CalendarComponents';
 import {Link} from "react-router-dom";
+import EventsInWeek from './EventsInWeek';
 import './index.css';
 
 
@@ -122,18 +123,10 @@ export default class Calendar extends React.Component {
                                     >{date.getDate()}</td>
                                     :
                                     <td key={index} />
-                                    
+                                   
                                 )}
-                            {/* {week.map((week, index)  => {
-                                this.props.events.map((event) =>   {
-                                    console.log(week);
-                                if(CalendarComponents.getISOWeekInMonth(week).week == CalendarComponents.getISOWeekInMonth(event).week){
-                                    <td onClick={<WeekCalendar/>}>asd</td>
-                                }else{
-                                    <td></td>
-                                }
-                                })})} */}
-                                <td><Link to="/week">asd</Link></td>
+                                <EventsInWeek monthData={monthData}/>
+                                <td><Link to="/week"></Link></td>
                             </tr> 
                             
                         )}

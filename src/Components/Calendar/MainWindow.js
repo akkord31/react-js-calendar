@@ -1,62 +1,45 @@
 import React, {useState, useEffect} from "react";
 import MonthCalendar from "./MonthCalendar"
-import Events from "./Events/Events"
+import Events from "..//Calendar/Events/Events";
+import EventsStorage from "..//..//store/EventsStorage";
+import axios from "axios";
 
-
-const events = [
-  {
-      id: 1,
-      time: '10:30',    
-      date: "5/15/2022",
-      title: "event example",
-      content: "texttexttexttext",
-      isDone: false,
-  },
-  {
-    id: 2,
-    time: '11:30',    
-    date: "5/15/2022",
-    title: "event example2",
-    content: "texttexttexttext",
-    isDone: false,
-  },
-  {
-    id: 3,
-    time: '10:30',    
-    date: "5/15/2022",
-    title: "event example33",
-    content: "texttexttexttext",
-    isDone: false,
-  },
-]; 
+const url = 'http://localhost:3001/events'
 
 export default function MainWindow(props){
   const [date, setDate] = useState(new Date());
   const [currentEvents, setCurrentEvents] = useState([]);
 
-  const newCurrentEvents = () => {
-    setCurrentEvents([]);
-    let copy = [];
-    for(let i = 0; i < events.length; i++){
-      console.log(date);
-        if(date.toLocaleDateString() == events[i].date)
-            copy.push(events[i])
-    }
-    setCurrentEvents(copy);
+useEffect(() => {
+  try{
+  (async () => {
+
+      const response = await axios.post(url,{date}).then( await function (response) {
+        
+        EventsStorage.currentEvents = [];
+          setCurrentEvents(response.data);
+          EventsStorage.currentEvents = response.data;
+       })
+          .catch(function (error) {
+              console.log("error");
+          })
+  })();
+
+} catch (e){
+  alert("Ошибка")
 }
+},[date])
 
   const handleDateChange = (date) => {
     setDate(date)
   } 
 
-  useEffect(() => {
-    newCurrentEvents();
-  }, [date])
+
 
 
   return(
     <div>
-      <MonthCalendar events={events} onChange={data => handleDateChange(data)}/>
+      <MonthCalendar onChange={data => handleDateChange(data)}/>
       <Events currentEvents = {currentEvents} isLoged={props.isLoged} date={date} />
     </div>
   );
