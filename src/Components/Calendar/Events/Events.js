@@ -6,20 +6,25 @@ import { Link } from "react-router-dom";
 import "./Events.css";
 
  const Events = (props) =>{
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         currentEvents: [],
-    //         isActive: false,
-    //     };
-    //   }
+
 
     const [isActive, setIsActive] = useState(false);  //popup
     const [checked, setChecked] = useState([]);  //checkbox
+    const [currentEvent, setCurrentEvent] = useState();
 
-    const handlePopupClick = (param) =>{
-        setIsActive(param);      
+    const handlePopupClick = (event) =>{
+        //setModalId(event.target.id);
+        let currentTargetId = event.target.id;
+        props.currentEvents.forEach( event => {
+            //console.log(event2.id);
+            if(event.id == currentTargetId){
+                //console.log(event);
+                setCurrentEvent(event);
+            } 
+        });
+        setIsActive(true);      
     }
+
     const handleCheck = (event) => {
         var updatedList = [...checked];
         if (event.target.checked) {
@@ -42,16 +47,17 @@ import "./Events.css";
             {props.isLoged ? 
             <div className="event__list">
                 {props.currentEvents.map((event) => (
-                    <div key={event.id} className="event__item">
+                    <div key={event.id}  className="event__item">
                         <input className="event__item__checkbox" type="checkbox" onChange={handleCheck} />
                         <div className="event__item__time">{event.time}</div>
                         <div className={isChecked}>{event.title}</div> 
-                        <button className="event__item__button" onClick={() => handlePopupClick(true)}>Подробнее</button>
+                        <button id={event.id} className="event__item__button" onClick={e => handlePopupClick(e)}>Подробнее</button>
                     </div>
                 ))}  
                 <Popup
                     isActive = {isActive}
-                    handlePopupClick = {() => handlePopupClick()}
+                    setIsActive={setIsActive}
+                    currentEvent = {currentEvent}
                 >
                 </Popup>
                 <div><Link to="/addevent">Добавить событие на этот день</Link></div>

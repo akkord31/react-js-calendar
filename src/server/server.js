@@ -9,6 +9,16 @@ var jsonParser = express.json();
 var app = express();
 app.use(cors());
 
+app.post("/delete", jsonParser, function(request, response){
+    var fileName = path.resolve(__dirname, 'data/events.json')
+    let data = fs.readFileSync(fileName, 'utf-8')
+    let events = JSON.parse(data)
+    let {delId} = request.body
+    let i = events.findIndex(el => el.id == delId)
+    events.splice(i,1)
+    fs.writeFileSync(fileName, JSON.stringify(events))
+    response.sendFile(fileName,{})
+})
 
 app.post("/registration", jsonParser, function(reqest, response){
   var fileName = path.resolve(__dirname, 'data/users.json')
@@ -67,8 +77,6 @@ app.post("/login", jsonParser, function(reqest, response){
   let users = JSON.parse(data)
   let done = false;
   const {id, login, password} = reqest.body
-  console.log(login);
-  console.log(password);
   for(var i = 0; i < users.length; i++){
       if(users[i].login == login && users[i].password == password){
           done = true

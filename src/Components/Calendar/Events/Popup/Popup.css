@@ -30,4 +30,11 @@
   min-height: 200px;
   width: 400px;
   }
-  
+  .popup__title{
+    text-align: center;
+  }
+
+.popup__button{
+  align-self: center;
+  position: absolute;
+}
