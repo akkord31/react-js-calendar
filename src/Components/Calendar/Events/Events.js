@@ -7,15 +7,11 @@ import "./Events.css";
  const Events = (props) =>{
     const [isActive, setIsActive] = useState(false);  //popup
     const [checked, setChecked] = useState([]);  //checkbox
-    //const [currentEvent, setCurrentEvent] = useState();
 
     const handlePopupClick = (event) =>{
         let currentTargetId = event.target.id;
         props.currentEvents.forEach( event => {
-            //console.log(event2.id);
             if(event.id == currentTargetId){
-                //console.log(event);
-                //setCurrentEvent(event);
                 props.handleChoosenEventChange(event);
             } 
         });
@@ -54,11 +50,12 @@ import "./Events.css";
                 <Popup
                     isActive = {isActive}
                     setIsActive={setIsActive}
-                    choosenEvent = {choosenEvent}
-
+                    choosenEvent = {props.choosenEvent}
+                    currentEvents={props.currentEvents}
                 >
                 </Popup>
                 <div><Link to="/addevent">Добавить событие на этот день</Link></div>
+                
             </div>
             
             

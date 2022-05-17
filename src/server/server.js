@@ -20,6 +20,20 @@ app.post("/delete", jsonParser, function(request, response){
     response.sendFile(fileName,{})
 })
 
+app.post("/edit", jsonParser, function(request, response){
+    var fileName = path.resolve(__dirname, 'data/events.json')
+    let data = fs.readFileSync(fileName, 'utf-8')
+    let events = JSON.parse(data)
+    let newEvent = request.body
+    let {id} = request.body
+    console.log(newEvent);
+    let i = events.findIndex(el => el.id == id)
+    events.splice(i,1)
+    events.push(newEvent)
+    fs.writeFileSync(fileName, JSON.stringify(events))
+    response.sendFile(fileName,{})
+})
+
 app.post("/registration", jsonParser, function(reqest, response){
   var fileName = path.resolve(__dirname, 'data/users.json')
 

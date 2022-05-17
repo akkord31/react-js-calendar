@@ -7,8 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainWindow from "./Components/Calendar/MainWindow";
 import WeekCalendar from './Components/Calendar/WeekCalendar/WeekCalendar';
 import AddEventForm from './Components/Calendar/Events/AddEventForm';
+import EditEventForm from "./Components/Calendar/Events/EditEventForm";
 import './App.css';
-
 
 export default class App extends React.Component {
   
@@ -18,21 +18,31 @@ export default class App extends React.Component {
     username: "",
     choosenEvent: new Object(),
   }
-  handleChoosenEventChange=(param) => {
+
+  handleChoosenEventChange = (param) => {
     this.setState({choosenEvent: param});
   }
+
+  handleCurrentDataChange = (param) => {
+    this.setState({date: param});
+  }
+
   updateDate = (sentdate) => {
     this.setState({date: sentdate});
   }
+
   handleDateChange = date => {
     this.setState({date});
-  };
+  }
+
   handleLoginClick = (param) => {
     this.setState({isLoged: param})
   }
+
   setUsername = (inputUsername) => {
     this.setState({username: inputUsername})
   }
+
   render() {
     return(
     <div className="App">
@@ -41,11 +51,12 @@ export default class App extends React.Component {
 
         <Header isLoged = {this.state.isLoged}/>
           <Routes>
-            <Route path="/" element={<MainWindow choosenEvent={this.state.choosenEvent} handleChoosenEventChange={this.handleChoosenEventChange} isLoged={this.state.isLoged}/>}></Route>
+            <Route path="/" element={<MainWindow handleCurrentDataChange={this.handleCurrentDataChange} choosenEvent={this.state.choosenEvent} handleChoosenEventChange={this.handleChoosenEventChange} isLoged={this.state.isLoged}/>}></Route>
             <Route path="/week" element={<WeekCalendar isLoged={this.state.isLoged}/>}></Route>
             <Route path="/register" element={<RegisterForm handleLoginClick={this.handleLoginClick}/>} />
             <Route path="/login" element={<LoginForm setUsername={this.setUsername} handleLoginClick={this.handleLoginClick}/>} />
-            <Route path="/addevent" element={<AddEventForm /> } />
+            <Route path="/addevent" element={<AddEventForm currentData = {this.state.date}/> } />
+            <Route path="/editevent" element={<EditEventForm choosenEvent={this.state.choosenEvent}/> } />
           </Routes>
           
       
