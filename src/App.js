@@ -15,7 +15,11 @@ export default class App extends React.Component {
   state = {
     date: new Date(),
     isLoged: false,
-    username: ""
+    username: "",
+    choosenEvent: new Object(),
+  }
+  handleChoosenEventChange=(param) => {
+    this.setState({choosenEvent: param});
   }
   updateDate = (sentdate) => {
     this.setState({date: sentdate});
@@ -37,7 +41,7 @@ export default class App extends React.Component {
 
         <Header isLoged = {this.state.isLoged}/>
           <Routes>
-            <Route path="/" element={<MainWindow isLoged={this.state.isLoged}/>}></Route>
+            <Route path="/" element={<MainWindow choosenEvent={this.state.choosenEvent} handleChoosenEventChange={this.handleChoosenEventChange} isLoged={this.state.isLoged}/>}></Route>
             <Route path="/week" element={<WeekCalendar isLoged={this.state.isLoged}/>}></Route>
             <Route path="/register" element={<RegisterForm handleLoginClick={this.handleLoginClick}/>} />
             <Route path="/login" element={<LoginForm setUsername={this.setUsername} handleLoginClick={this.handleLoginClick}/>} />

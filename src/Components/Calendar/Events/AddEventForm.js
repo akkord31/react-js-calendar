@@ -13,9 +13,9 @@ export default function AddEventForm(props){
     const [title, setName] = useState('');
     const [content, setDescription] = useState('');
 
-    useEffect(() => {
-        name2();
-    },[])
+    // useEffect(() => {
+    //    // name2();
+    // },[])
 
     let navigate = useNavigate();
     // useEffect(() => {
@@ -34,14 +34,14 @@ export default function AddEventForm(props){
         setDescription(e.target.value);
     }
 
-    const name2 = () => {
-        if(EventsStorage.currentId > 0){
-            setName(EventsStorage.events[EventsStorage.currentId].title)
-        }
-        else{
-            setName('');
-        }
-    }
+    // const name2 = () => {
+    //     if(EventsStorage.currentId > 0){
+    //         setName(EventsStorage.events[EventsStorage.currentId].title)
+    //     }
+    //     else{
+    //         setName('');
+    //     }
+    // }
 
     const submitFrom = (event) => {
         event.preventDefault();

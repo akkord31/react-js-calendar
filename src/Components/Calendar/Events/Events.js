@@ -2,24 +2,21 @@ import React from "react";
 import { useState } from 'react';
 import Popup from ".//Popup/Popup";
 import { Link } from "react-router-dom";
-
 import "./Events.css";
 
  const Events = (props) =>{
-
-
     const [isActive, setIsActive] = useState(false);  //popup
     const [checked, setChecked] = useState([]);  //checkbox
-    const [currentEvent, setCurrentEvent] = useState();
+    //const [currentEvent, setCurrentEvent] = useState();
 
     const handlePopupClick = (event) =>{
-        //setModalId(event.target.id);
         let currentTargetId = event.target.id;
         props.currentEvents.forEach( event => {
             //console.log(event2.id);
             if(event.id == currentTargetId){
                 //console.log(event);
-                setCurrentEvent(event);
+                //setCurrentEvent(event);
+                props.handleChoosenEventChange(event);
             } 
         });
         setIsActive(true);      
@@ -57,7 +54,8 @@ import "./Events.css";
                 <Popup
                     isActive = {isActive}
                     setIsActive={setIsActive}
-                    currentEvent = {currentEvent}
+                    choosenEvent = {choosenEvent}
+
                 >
                 </Popup>
                 <div><Link to="/addevent">Добавить событие на этот день</Link></div>
