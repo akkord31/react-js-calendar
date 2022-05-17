@@ -37,7 +37,7 @@ export default function EditEventForm(props){
         event.preventDefault();
         try{
             (async () => {
-                const response = await axios.post(url,{id, date, title, content }).then( await function (response) {
+                const response = await axios.post(url,{id, date, title,  }).then( await function (response) {
          
                     navigate("/");
                   })

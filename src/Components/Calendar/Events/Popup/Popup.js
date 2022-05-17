@@ -40,8 +40,8 @@ const Popup = (props) => {
           </div>
           <div className="popup__footer">
           </div>
-          <button className="popup__button" onClick={() =>deleteEvent()}> Удалить</button>
-          <button><Link to="/editevent" >Редактировать</Link></button>
+          <button className="popup__button__delete" onClick={() =>deleteEvent()}> Удалить</button>
+          <button className="popup__button__edit"><Link to="/editevent" >Редактировать</Link></button>
           
         </div>
       
