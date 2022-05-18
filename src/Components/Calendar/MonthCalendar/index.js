@@ -104,7 +104,6 @@ export default class Calendar extends React.Component {
                             {weekDayNames.map(name =>
                                 <th key={name}>{name}</th>    
                             )}
-                            <td>Дела</td>
                         </tr>
                         
                     </thead>
